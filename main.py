@@ -52,7 +52,7 @@ class Tile(pygame.sprite.Sprite):
         self.image = tile_images[tile_type]
 
         self.rect = self.image.get_rect().move(
-                tile_width * pos_x, tile_height * pos_y)
+            tile_width * pos_x, tile_height * pos_y)
 
 
 class Bird(pygame.sprite.Sprite):
@@ -61,10 +61,8 @@ class Bird(pygame.sprite.Sprite):
         self.images = []
         self.index = 0
         self.counter = 0
-        for num in range(1, 4):
-            img = pygame.image.load(f'img/bird{num}.png')
-            self.images.append(img)
-        self.image = self.images[self.index]
+        img = pygame.image.load('img/chiken.png')
+        self.image = pygame.transform.scale(img, (560, 270))
         self.rect = self.image.get_rect()
         self.rect.center = [x, y]
         self.vel = 0
@@ -76,6 +74,7 @@ class Bird(pygame.sprite.Sprite):
             self.vel += 0.5
             if self.vel > 8:
                 self.vel = 8
+
         if game_over == False:
             # jump
             if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
@@ -93,7 +92,6 @@ class Bird(pygame.sprite.Sprite):
                 self.index += 1
                 if self.index >= len(self.images):
                     self.index = 0
-            self.image = self.images[self.index]
         else:
             self.image = pygame.transform.rotate(self.images[self.index], self.vel)
 
